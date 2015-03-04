@@ -1,6 +1,7 @@
 
 package Codigo;
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -34,18 +35,22 @@ public class VentanaAnimacion extends javax.swing.JFrame {
         }
     });
     
-    Image link;
+    //creo el objeto link
+    Link link = new Link();
     
-    int contador = 0;
+    //variable para guardar la dirección
+    //si vale 0 => parado
+    //si vale 1 => izquierda
+    //si vale 2 => derecha
+    //si vale 3 => arriba
+    //si vale 4 => abajo
+    int direccion = 0;
     
-    
+    /**
+     * Creates new form VentanaAnimacion
+     */
     public VentanaAnimacion() {
         initComponents();
-        try {
-            link = ImageIO.read((getClass().getResource("/Imagenes/link.png")));
-        } catch (IOException ex) {
-            Logger.getLogger(VentanaAnimacion.class.getName()).log(Level.SEVERE, null, ex);
-        }
         this.setSize(anchoPantalla, altoPantalla);
         
         buffer = (BufferedImage) jPanel1.createImage(anchoPantalla, altoPantalla);
@@ -63,24 +68,10 @@ public class VentanaAnimacion extends javax.swing.JFrame {
         
         ////////////////// dibujo a Link ////////////////////////
         
-        contador++;
-        
-        //si el contador ha llegado a 10 lo vuevlo a poner a 0
-        if (contador == 10){contador = 0;}
-        
-        g2.drawImage(link,
-                100,   //posición x dentro del buffer
-                100,   //posición y dentro del buffer
-                2*120,   //tamaño en el eje x del frame que quiero pintar
-                2*130,   //tamaño en el eje y del frame que quiero pintar
-                contador*120, //posición inicial x dentro del SPRITESHEET
-                5*130, //posición inicial y dentro del SPRITESHEET, el 5 indica
-                //la dirección de link ya que esta selecciona la fila 5 de la imágen
-                contador*120 + 120, //tamaño del tile (ancho)
-                5*130 + 130, //tamaño del tile (alto), el 5 indica la dirección de
-                //link ya que selecciona la fila 5 de la imagen link.png
-                null
-                );
+        //primero selecciono la dirección
+        link.setDir(direccion);
+        //dibujo a Link
+        link.dibuja(g2);
 
       ///////////////////////////////////////////////////////////
       //apunto al JPanel y repinto con el nuevo buffer  
@@ -101,6 +92,14 @@ public class VentanaAnimacion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,6 +131,20 @@ public class VentanaAnimacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        switch (evt.getKeyCode()){
+            case KeyEvent.VK_LEFT  : direccion = 1; break;
+            case KeyEvent.VK_RIGHT : direccion = 2; break;
+            case KeyEvent.VK_UP    : direccion = 3; break;
+            case KeyEvent.VK_DOWN  : direccion = 4; break;    
+        }
+        
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        direccion = 0;
+    }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments
