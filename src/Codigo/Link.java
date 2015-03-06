@@ -16,7 +16,8 @@ import javax.imageio.ImageIO;
 public class Link {
      Image link;
      private int contador = 0;
-     private int dir = 0;
+     int dir = 0;
+     boolean parado = true;
      
      public Link(){
          try {
@@ -48,7 +49,11 @@ public class Link {
                 //link
                 null
                 );
-         if (dir != 0) contador++;
+         
+         if (!parado){ //si no está parado incremento el contador
+             contador++;
+         }
+         //else { contador = 0;} //si está parado, reseteo el contador
          if (contador == 10) contador = 0;
      }
 
