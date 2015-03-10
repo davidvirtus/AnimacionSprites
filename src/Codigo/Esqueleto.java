@@ -43,10 +43,10 @@ public class Esqueleto {
          //si está parado hace lo que hacía amtes
          if (!parado){
             switch (dir){
-                case 1: fila = 2; mueve (-1,0); break; //izquierda
-                case 2: fila = 6; mueve (1, 0); break; //derecha
-                case 3: fila = 4; mueve (0,-1); break; //arriba
-                case 4: fila = 0; mueve (0, 1); break; //abajo
+                case 1: fila = 2;  break; //izquierda
+                case 2: fila = 6;  break; //derecha
+                case 3: fila = 4;  break; //arriba
+                case 4: fila = 0;  break; //abajo
             }
             contador++;
          }

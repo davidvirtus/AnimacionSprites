@@ -74,12 +74,15 @@ public class VentanaAnimacion extends javax.swing.JFrame {
     private void dibujaListaEsqueletos(Graphics2D g2){
         for (int i=0; i<listaEsqueletos.size(); i++){
             Esqueleto e = listaEsqueletos.get(i);
-            //actualizo la posición x del esqueleto en función de la posición y de Link
-            if (e.x > link.x){e.x--; e.dir = 3;}
-            else{e.x++; e.dir = 4;}
+            
+            //actualizo la posición x del esqueleto en función de la posición x de Link
+            if (e.x > link.x){e.x--; e.dir = 1;}
+            else if (e.x < link.x){ e.x++; e.dir = 2;}
+            
             //actualizo la posición y del esqueleto en función de la posición y de Link
-            if (e.y > link.y){e.y--; e.dir = 1;}
-            else{e.y++; e.dir = 2;}
+            if (e.y > link.y){e.y--; e.dir = 3;}
+            else if (e.y < link.y){e.y++; e.dir = 4;}
+            
             e.dibuja(g2);
             
         }
