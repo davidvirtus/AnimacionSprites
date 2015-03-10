@@ -20,7 +20,7 @@ public class Esqueleto {
      private int contador = 0;
         
         //dirección en la que se mueve
-     int dir = 0;
+     int dir = 1;
         
         //indica si está parado o se está moviendo
      boolean parado = true;
@@ -29,6 +29,14 @@ public class Esqueleto {
      int x = 0, y = 0;
      private int anchoSprite = 64;
      private int altoSprite = 64;
+     
+     public int getDir() {
+        return dir;
+    }
+
+    public void setDir(int dir) {
+        this.dir = dir;
+    }
      
      public Esqueleto(){
          try {
@@ -76,14 +84,6 @@ public class Esqueleto {
          
          if (contador == 6) contador = 0;
      }
-
-    public int getDir() {
-        return dir;
-    }
-
-    public void setDir(int dir) {
-        this.dir = dir;
-    }
     
     private void mueve (int dx, int dy){//dx=despaza en la x, dy=desplaza en la y
         x = x + dx;

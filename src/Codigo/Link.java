@@ -28,6 +28,14 @@ public class Link {
         //coordenadas de Link
      int x = 0, y = 0;
      
+     public int getDir() {
+        return dir;
+    }
+
+    public void setDir(int dir) {
+        this.dir = dir;
+    }
+     
      public Link(){
          try {
             link = ImageIO.read((getClass().getResource("/Imagenes/link.png")));
@@ -75,14 +83,6 @@ public class Link {
          //else { contador = 0;} //si está parado, reseteo el contador
          if (contador == 9) contador = 0;
      }
-
-    public int getDir() {
-        return dir;
-    }
-
-    public void setDir(int dir) {
-        this.dir = dir;
-    }
     
     private void mueve (int dx, int dy){//dx=despaza en la x, dy=desplaza en la y
         x = x + dx;
